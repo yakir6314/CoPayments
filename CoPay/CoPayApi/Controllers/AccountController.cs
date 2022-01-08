@@ -65,6 +65,10 @@ namespace CoPayApi.Controllers
         [Authorize]
         public async Task<IActionResult> changePassword([FromBody] ChangePasswordDto model)
         {
+            if (HttpContext.User.Identity.Name != model.Email)
+            {
+                return Unauthorized();
+            }
             if (ModelState.IsValid)
             {
                 User user = await this.userManager.FindByEmailAsync(model.Email);
