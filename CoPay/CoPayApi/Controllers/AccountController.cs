@@ -47,12 +47,11 @@ namespace CoPayApi.Controllers
                     user.Email = model.Email;
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
-
                     IdentityResult result = userManager.CreateAsync(user, model.Password).Result;
 
                     if (result.Succeeded)
                     {
-                        await userManager.AddToRoleAsync(user, "User");
+                        await userManager.AddToRoleAsync(user, "Agent");
                         return Created("", model);
                     }
                 }
@@ -76,7 +75,7 @@ namespace CoPayApi.Controllers
                         IdentityResult result = userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).Result;
                         if (result.Succeeded)
                         {
-                            await userManager.AddToRoleAsync(user, "User");
+                            await userManager.AddToRoleAsync(user, "Agent");
                             LoginDto login = new LoginDto
                             {
                                 Email = model.Email,
@@ -91,6 +90,32 @@ namespace CoPayApi.Controllers
                     return Unauthorized();
                 }
 
+            }
+            return BadRequest();
+        }
+        [HttpPost("ChangeToAdminPolicy")]
+        [Authorize(Policy = "RequireAdminAccess")]
+        public async Task<IActionResult> ChangeToAdminPolicy([FromBody] string emailAddress)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await this.userManager.FindByEmailAsync(emailAddress);
+                if (user != null)
+                {
+                    var role=userManager.AddToRoleAsync(user, "Admin").Result;
+                    if (role.Succeeded)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return StatusCode(500, "something went wrong");
+                    }
+                }
+                else
+                {
+                    return Unauthorized();
+                }
             }
             return BadRequest();
         }
@@ -111,6 +136,7 @@ namespace CoPayApi.Controllers
                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                             new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
                         };
+                        var roles = await this.userManager.GetRolesAsync(user);
                         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.config["Tokens:Key"]));
                         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                         var token = new JwtSecurityToken(

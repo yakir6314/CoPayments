@@ -49,6 +49,13 @@ namespace CoPayApi
                 };
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminAccess", policy =>
+                       policy.RequireRole("Admin"));
+                options.AddPolicy("RequireAgentAccess", policy =>
+                       policy.RequireRole("Agent"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
