@@ -1,5 +1,6 @@
 ﻿using CoPayApi.Data.Entities;
 using CoPayApi.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -58,6 +59,39 @@ namespace CoPayApi.Controllers
 
             }
 
+            return BadRequest();
+        }
+        [HttpPost("changePassword")]
+        [Authorize]
+        public async Task<IActionResult> changePassword([FromBody] ChangePasswordDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await this.userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    var passwordCheck = await this.signInManager.CheckPasswordSignInAsync(user, model.OldPassword, false);
+                    if (passwordCheck.Succeeded)
+                    {
+                        IdentityResult result = userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).Result;
+                        if (result.Succeeded)
+                        {
+                            await userManager.AddToRoleAsync(user, "User");
+                            LoginDto login = new LoginDto
+                            {
+                                Email = model.Email,
+                                Password = model.NewPassword
+                            };
+                            return await Login(login);
+                        }
+                    }
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+
+            }
             return BadRequest();
         }
         [HttpPost("login")]
