@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,6 +68,7 @@ namespace CoPayApi.Controllers
             if (ModelState.IsValid)
             {
                 User user = await this.userManager.FindByEmailAsync(model.Email);
+                
                 if (user != null)
                 {
                     var passwordCheck = await this.signInManager.CheckPasswordSignInAsync(user, model.OldPassword, false);
@@ -75,7 +77,6 @@ namespace CoPayApi.Controllers
                         IdentityResult result = userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).Result;
                         if (result.Succeeded)
                         {
-                            await userManager.AddToRoleAsync(user, "Agent");
                             LoginDto login = new LoginDto
                             {
                                 Email = model.Email,
@@ -95,13 +96,18 @@ namespace CoPayApi.Controllers
         }
         [HttpPost("ChangeToAdminPolicy")]
         [Authorize(Policy = "RequireAdminAccess")]
-        public async Task<IActionResult> ChangeToAdminPolicy([FromBody] string emailAddress)
+        public async Task<IActionResult> ChangeToAdminPolicy( string emailAddress)
         {
             if (ModelState.IsValid)
             {
                 User user = await this.userManager.FindByEmailAsync(emailAddress);
                 if (user != null)
                 {
+                    List<string> currentRole = userManager.GetRolesAsync(user).Result.ToList();
+                    if(currentRole.Any(a=>a== "Admin"))
+                    {
+                        return BadRequest();
+                    }
                     var role=userManager.AddToRoleAsync(user, "Admin").Result;
                     if (role.Succeeded)
                     {
