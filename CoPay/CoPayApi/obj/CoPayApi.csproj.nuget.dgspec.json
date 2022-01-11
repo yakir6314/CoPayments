@@ -1,27 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj": {}
+    "C:\\Users\\Adi Mor\\source\\repos\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj": {}
   },
   "projects": {
-    "C:\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj": {
+    "C:\\Users\\Adi Mor\\source\\repos\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj",
+        "projectUniqueName": "C:\\Users\\Adi Mor\\source\\repos\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj",
         "projectName": "CoPayApi",
-        "projectPath": "C:\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj",
-        "packagesPath": "C:\\Users\\yakir\\.nuget\\packages\\",
-        "outputPath": "C:\\CoPayments\\CoPay\\CoPayApi\\obj\\",
+        "projectPath": "C:\\Users\\Adi Mor\\source\\repos\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj",
+        "packagesPath": "C:\\Users\\Adi Mor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Adi Mor\\source\\repos\\CoPayments\\CoPay\\CoPayApi\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\yakir\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Adi Mor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -83,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
