@@ -12,7 +12,16 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.22" />
+    <PackageReference Include="Google.Cloud.Vision.V1" Version="2.4.0" />
   </ItemGroup>
 
 
+  <ItemGroup>
+    <None Remove="Google.Apis.Vision.v1" />
+    <None Remove="Google.Cloud.Vision.V1" />
+    <None Remove="Secrets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Secrets\" />
+  </ItemGroup>
 </Project>

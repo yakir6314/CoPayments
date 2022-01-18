@@ -1,33 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj": {}
+    "/Users/idoazulay/Projects/CoPayments/CoPay/CoPayApi/CoPayApi.csproj": {}
   },
   "projects": {
-    "C:\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj": {
+    "/Users/idoazulay/Projects/CoPayments/CoPay/CoPayApi/CoPayApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj",
+        "projectUniqueName": "/Users/idoazulay/Projects/CoPayments/CoPay/CoPayApi/CoPayApi.csproj",
         "projectName": "CoPayApi",
-        "projectPath": "C:\\CoPayments\\CoPay\\CoPayApi\\CoPayApi.csproj",
-        "packagesPath": "C:\\Users\\yakir\\.nuget\\packages\\",
-        "outputPath": "C:\\CoPayments\\CoPay\\CoPayApi\\obj\\",
+        "projectPath": "/Users/idoazulay/Projects/CoPayments/CoPay/CoPayApi/CoPayApi.csproj",
+        "packagesPath": "/Users/idoazulay/.nuget/packages/",
+        "outputPath": "/Users/idoazulay/Projects/CoPayments/CoPay/CoPayApi/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\yakir\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "/Users/idoazulay/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -46,6 +41,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Google.Cloud.Vision.V1": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[3.1.22, )"
@@ -83,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.403/RuntimeIdentifierGraph.json"
         }
       }
     }
