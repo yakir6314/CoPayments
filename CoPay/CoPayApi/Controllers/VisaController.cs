@@ -2,8 +2,6 @@
 using System.IO;
 using System.Net;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace CoPayApi.Controllers
 {
     [Route("api/[controller]")]
@@ -13,7 +11,6 @@ namespace CoPayApi.Controllers
 
         string BaseVisaURL = @"https://sandbox.api.visa.com/dcas/accountservices/v1/accounts/{accountId}/cards/";
 
-        // GET: api/<VisaController>
         [HttpGet("getCardTransaction")]
         public string GetCardTransactions(int cardId)
         {
