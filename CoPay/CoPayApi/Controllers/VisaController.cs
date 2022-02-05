@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,10 +15,10 @@ namespace CoPayApi.Controllers
 
         // GET: api/<VisaController>
         [HttpGet("getCardTransaction")]
-        public IEnumerable<string> GetCardTransactions(int cardId)
+        public string GetCardTransactions(int cardId)
         {
             string TransactionURL = $"{cardId}/transactions";
-            Get(BaseVisaURL, TransactionURL);
+            string Tansactions =  Get(BaseVisaURL, TransactionURL);
 
 
              string Get(string Baseurl, string Url)
@@ -38,8 +34,7 @@ namespace CoPayApi.Controllers
                 }
             }
 
-
-            return new string[] { "value1", "value2" };
+            return Tansactions;
         }
     }
 }
