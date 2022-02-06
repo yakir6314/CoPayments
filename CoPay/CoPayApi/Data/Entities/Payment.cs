@@ -15,5 +15,7 @@ namespace CoPayApi.Data.Entities
         public DateTime dateAdded { get; set; }
         public string comment { get; set; }
         public string business { get; set; }
+        public bool isApproved { get; set; }
+        public DateTime? ApproveDate { get; set; }
     }
 }

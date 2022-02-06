@@ -39,6 +39,30 @@ namespace CoPayApi.Controllers
         }
 
         [HttpPost]
+        [Route("ApprovePayment")]
+        [Authorize(Policy = "RequireAdminAccess")]
+        public async Task<IActionResult> ApprovePayment(int paymentId)
+        {
+            ErrorHandler err = new ErrorHandler() { isSuccess = false, data = null, error = null };
+            Payment payment = this._dbContext.payments.Where(w => w.id == paymentId).FirstOrDefault();
+            if (payment == null)
+            {
+                err.failFunction("no payment found");
+                return BadRequest(err);
+            }
+            if (payment.isApproved)
+            {
+                err.failFunction("payment already approved");
+                return BadRequest(err);
+            }
+            payment.ApproveDate = DateTime.Now;
+            payment.isApproved = true;
+            this._dbContext.SaveChanges();
+            err.successFunction(payment);
+            return Ok(err);
+        }
+
+        [HttpPost]
         [Route("addPayment")]
         public async Task<IActionResult> addPayment([FromBody] PaymentDto paymentDto)
         {
@@ -56,7 +80,8 @@ namespace CoPayApi.Controllers
                 business = paymentDto.business,
                 comment = paymentDto.comment,
                 dateAdded = DateTime.Now,
-                sum = paymentDto.sum
+                sum = paymentDto.sum,
+                isApproved=false
             };
             payment.user = await this.userManager.FindByEmailAsync(HttpContext.User.Identity.Name);
             this._dbContext.Add(payment);
