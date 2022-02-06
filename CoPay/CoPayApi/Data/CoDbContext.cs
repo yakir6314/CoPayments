@@ -10,5 +10,7 @@ namespace CoPayApi.Data
         {
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Company> companies { get; set; }
+        public DbSet<Payment> payments { get; set; }
     }
 }

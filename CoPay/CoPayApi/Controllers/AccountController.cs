@@ -36,7 +36,7 @@ namespace CoPayApi.Controllers
             this.config = config;
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto model)
+        public async Task<IActionResult> AddEmployee([FromBody] RegisterDto model)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace CoPayApi.Controllers
         [Authorize]
         public async Task<IActionResult> changePassword([FromBody] ChangePasswordDto model)
         {
-            if (HttpContext.User.Identity.Name != model.Email && !HttpContext.User.IsInRole("Admin"))
+            if (HttpContext.User.Identity.Name != model.Email || !HttpContext.User.IsInRole("Admin"))
             {
                 return Unauthorized();
             }
