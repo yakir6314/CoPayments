@@ -48,6 +48,8 @@ namespace CoPayApi.Controllers
                     user.Email = model.Email;
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
+                    User adminUser = await userManager.GetUserAsync(HttpContext.User);
+                    user.company = adminUser.company;
                     IdentityResult result = userManager.CreateAsync(user, model.Password).Result;
 
                     if (result.Succeeded)
@@ -105,12 +107,17 @@ namespace CoPayApi.Controllers
             if (ModelState.IsValid)
             {
                 User user = await this.userManager.FindByEmailAsync(emailAddress);
+                User adminUser=await userManager.GetUserAsync(HttpContext.User);
                 if (user != null)
                 {
                     List<string> currentRole = userManager.GetRolesAsync(user).Result.ToList();
                     if(currentRole.Any(a=>a== "Admin"))
                     {
                         return BadRequest();
+                    }
+                    if (user.company.Id != adminUser.company.Id)
+                    {
+                        return Unauthorized();
                     }
                     var role=userManager.AddToRoleAsync(user, "Admin").Result;
                     if (role.Succeeded)
