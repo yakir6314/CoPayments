@@ -1,0 +1,243 @@
+{
+  "receivedTimestamp": "${exists}",
+  "resource": {
+    "paginationData": {
+      "lastPage": false,
+      "firstPage": true
+    },
+    "transactions": [
+      {
+        "transactionDescription": "Scheduled Card Reload",
+        "transactionId": "212472702010542240",
+        "transactionInfo": {
+          "dateTime": "2020-11-21T12:00:10.540Z",
+          "transactionAmount": {
+            "amount": 44,
+            "currencyCode": "840"
+          },
+          "type": "CREDIT",
+          "merchantInfo": {
+            "address": {
+              "city": "Denver",
+              "countryCode": "USA",
+              "postalCode": "80003",
+              "region": "CO",
+              "line1": "1234 Main Street"
+            },
+            "name": "100 - Highlands Ranch"
+          },
+          "status": "POSTED"
+        }
+      },
+      {
+        "transactionDescription": "Miscellaneous Adjustment Debit",
+        "transactionId": "212472406975141512",
+        "transactionInfo": {
+          "dateTime": "2020-11-17T02:02:55.140Z",
+          "transactionAmount": {
+            "amount": -80,
+            "currencyCode": "840"
+          },
+          "type": "DEBIT",
+          "merchantInfo": {
+            "address": {
+              "city": "AURORA",
+              "countryCode": "USA",
+              "postalCode": "80202",
+              "region": "1",
+              "line1": "201 BLVD OVER"
+            },
+            "name": "UPGRADE LOC OVER"
+          },
+          "status": "POSTED"
+        }
+      },
+      {
+        "transactionDescription": "Miscellaneous Adjustment Credit",
+        "transactionId": "212472406765064416",
+        "transactionInfo": {
+          "dateTime": "2020-11-17T01:59:25.063Z",
+          "transactionAmount": {
+            "amount": 44,
+            "currencyCode": "840"
+          },
+          "type": "CREDIT",
+          "merchantInfo": {
+            "address": {
+              "city": "AURORA",
+              "countryCode": "USA",
+              "postalCode": "80202",
+              "region": "1",
+              "line1": "201 BLVD OVER"
+            },
+            "name": "UPGRADE LOC OVER"
+          },
+          "status": "POSTED"
+        }
+      },
+      {
+        "transactionDescription": "Card Activation Fee",
+        "transactionId": "212471288018940241",
+        "transactionInfo": {
+          "dateTime": "2020-11-04T03:13:38.940Z",
+          "transactionAmount": {
+            "amount": -2,
+            "currencyCode": "840"
+          },
+          "type": "DEBIT",
+          "merchantInfo": {
+            "address": {
+              "city": "Your Town",
+              "countryCode": "USA",
+              "postalCode": "80000",
+              "region": "CO",
+              "line1": "123 Main St."
+            },
+            "name": "Sample Financial Institut"
+          },
+          "status": "POSTED"
+        }
+      },
+      {
+        "transactionDescription": "Paper Statement Fee",
+        "transactionId": "212470549236776262",
+        "transactionInfo": {
+          "dateTime": "2020-10-27T03:00:36.777Z",
+          "transactionAmount": {
+            "amount": -1.19,
+            "currencyCode": "840"
+          },
+          "type": "DEBIT",
+          "merchantInfo": {
+            "address": {
+              "city": "Your Town",
+              "countryCode": "USA",
+              "postalCode": "80000",
+              "region": "CO",
+              "line1": "123 Main St."
+            },
+            "name": "Sample Financial Institut"
+          },
+          "status": "POSTED"
+        }
+      },
+      {
+        "transactionDescription": "Scheduled Card Reload",
+        "transactionId": "212470020016267309",
+        "transactionInfo": {
+          "dateTime": "2020-10-21T12:00:16.267Z",
+          "transactionAmount": {
+            "amount": 44,
+            "currencyCode": "840"
+          },
+          "type": "CREDIT",
+          "merchantInfo": {
+            "address": {
+              "city": "Denver",
+              "countryCode": "USA",
+              "postalCode": "80003",
+              "region": "CO",
+              "line1": "1234 Main Street"
+            },
+            "name": "100 - Highlands Ranch"
+          },
+          "status": "POSTED"
+        }
+      },
+      {
+        "transactionDescription": "Miscellaneous Adjustment Credit",
+        "transactionId": "212468409220400912",
+        "transactionInfo": {
+          "dateTime": "2020-10-02T08:33:40.400Z",
+          "transactionAmount": {
+            "amount": 5,
+            "currencyCode": "840"
+          },
+          "type": "CREDIT",
+          "merchantInfo": {
+            "address": {
+              "city": "AURORA",
+              "countryCode": "USA",
+              "postalCode": "80202",
+              "region": "1",
+              "line1": "201 BLVD OVER"
+            },
+            "name": "UPGRADE LOC OVER"
+          },
+          "status": "POSTED"
+        }
+      },
+      {
+        "transactionDescription": "Forgot PIN Fee",
+        "transactionId": "212468263192430825",
+        "transactionInfo": {
+          "dateTime": "2020-09-30T03:59:52.430Z",
+          "transactionAmount": {
+            "amount": -0.5,
+            "currencyCode": "840"
+          },
+          "type": "DEBIT",
+          "merchantInfo": {
+            "address": {
+              "city": "Your Town",
+              "countryCode": "USA",
+              "postalCode": "80000",
+              "region": "CO",
+              "line1": "123 Main St."
+            },
+            "name": "Sample Financial Institut"
+          },
+          "status": "POSTED"
+        }
+      },
+      {
+        "transactionDescription": "Purchase First Class Shipping Fee",
+        "transactionId": "212468257433974824",
+        "transactionInfo": {
+          "dateTime": "2020-09-30T02:23:53.973Z",
+          "transactionAmount": {
+            "amount": -10.02,
+            "currencyCode": "840"
+          },
+          "type": "DEBIT",
+          "merchantInfo": {
+            "address": {
+              "city": "Your Town",
+              "countryCode": "USA",
+              "postalCode": "80000",
+              "region": "CO",
+              "line1": "123 Main St."
+            },
+            "name": "Sample Financial Institut"
+          },
+          "status": "POSTED"
+        }
+      },
+      {
+        "transactionDescription": "Additional Card Fee",
+        "transactionId": "212468257433974824",
+        "transactionInfo": {
+          "dateTime": "2020-09-30T02:23:53.973Z",
+          "transactionAmount": {
+            "amount": -10.47,
+            "currencyCode": "840"
+          },
+          "type": "DEBIT",
+          "merchantInfo": {
+            "address": {
+              "city": "Your Town",
+              "countryCode": "USA",
+              "postalCode": "80000",
+              "region": "CO",
+              "line1": "123 Main St."
+            },
+            "name": "Sample Financial Institut"
+          },
+          "status": "POSTED"
+        }
+      }
+    ],
+    "last4PrimaryAccountNumber": "6459"
+  },
+  "processingTimeinMs": "${exists}"
+}
