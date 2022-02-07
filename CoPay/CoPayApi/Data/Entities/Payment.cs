@@ -17,5 +17,6 @@ namespace CoPayApi.Data.Entities
         public string business { get; set; }
         public bool isApproved { get; set; }
         public DateTime? ApproveDate { get; set; }
+        public CraditCard CraditCard { get; set; }
     }
 }
