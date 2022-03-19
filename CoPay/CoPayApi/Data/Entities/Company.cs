@@ -7,6 +7,7 @@ namespace CoPayApi.Data.Entities
         public string Name { get; set; }
         public int PrivateCompanyID { get; set; }
         public int Id { get; set; }
+        public string customerCode; 
         public List<User> UsersInTheCompany { get; set; }
     }
 }

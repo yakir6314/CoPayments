@@ -1,7 +1,11 @@
-﻿using System;
+﻿using CoPayApi.Data.DTO;
+using CoPayApi.General;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace CoPayApi.Data.Entities
@@ -18,5 +22,36 @@ namespace CoPayApi.Data.Entities
         public bool isApproved { get; set; }
         public DateTime? ApproveDate { get; set; }
         public CraditCard CraditCard { get; set; }
+        public ErrorHandler sendPaymentToSap()
+        {
+            ErrorHandler err = new ErrorHandler() { isSuccess = false, error = string.Empty };
+            string url = Consts.sapBaseUrl + Consts.addPaymentToSapUrl;
+            string jsonObject = JsonConvert.SerializeObject(this);
+            string stringResponse = "";
+            dynamic dynamicResponse;
+            try
+            {
+
+                using (WebClient wc = new WebClient())
+                {
+                    stringResponse = wc.UploadString(url, jsonObject);
+                    dynamicResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
+                    if (dynamicResponse["success"] == true)
+                    {
+                        err.successFunction();
+                    }
+                    else
+                    {
+                        err.failFunction(dynamicResponse["error"]);
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
+
+            return err;
+        }
     }
 }
