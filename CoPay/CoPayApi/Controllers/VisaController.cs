@@ -15,7 +15,7 @@ namespace CoPayApi.Controllers
         string appId = "";
 
         [HttpGet("getCardTransaction")]
-        public string GetCardTransactions(int cardId,bool isTest=false)
+        public ActionResult<string> GetCardTransactions(int cardId,bool isTest)
         {
             string TransactionURL = $"{cardId}/transactions";
             string Tansactions = isTest?getMoc(): Get(BaseVisaURL, TransactionURL);

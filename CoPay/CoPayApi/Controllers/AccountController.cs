@@ -100,9 +100,10 @@ namespace CoPayApi.Controllers
             }
             return BadRequest();
         }
-        [HttpPost("ChangeToAdminPolicy/{emailAddress}")]
-        [Authorize(Policy = "RequireAdminAccess")]
-        public async Task<IActionResult> ChangeToAdminPolicy( string emailAddress)
+        [Authorize("RequireAdminAccess")]
+        [HttpPost("ChangeToAdminPolicy")]
+        
+        public async Task<IActionResult> ChangeToAdminPolicy(string emailAddress)
         {
             if (ModelState.IsValid)
             {
@@ -151,9 +152,13 @@ namespace CoPayApi.Controllers
                         {
                             new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
+                            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
                         };
                         var roles = await this.userManager.GetRolesAsync(user);
+                        foreach (var role in roles)
+                        {
+                            claims.Add(new Claim("roles", role));
+                        }
                         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.config["Tokens:Key"]));
                         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                         var token = new JwtSecurityToken(

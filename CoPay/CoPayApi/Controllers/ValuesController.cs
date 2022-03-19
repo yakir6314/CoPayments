@@ -20,7 +20,7 @@ namespace CoPayApi.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet("Get")]
         public ActionResult<string> Get(int id)
         {
             return "value";
