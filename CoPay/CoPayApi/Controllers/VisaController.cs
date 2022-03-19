@@ -8,8 +8,10 @@ namespace CoPayApi.Controllers
     [ApiController]
     public class VisaController : ControllerBase
     {
+            //need to add the app id in the header
 
-        string BaseVisaURL = @"https://sandbox.api.visa.com/dcas/accountservices/v1/accounts/{accountId}/cards/";
+        string BaseVisaURL = @"https://sandbox.api.visa.com/dcas/cardservices/v1/cards/prepaid/";
+        string appId = "";
 
         [HttpGet("getCardTransaction")]
         public string GetCardTransactions(int cardId)
@@ -21,6 +23,7 @@ namespace CoPayApi.Controllers
              string Get(string Baseurl, string Url)
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Baseurl+Url);
+                request.Headers.Add("app - id", appId);
                 request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
