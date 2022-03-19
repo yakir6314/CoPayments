@@ -75,13 +75,20 @@ namespace CoPayApi.Controllers
                 err.error= "sum is smaller then zero or no business";
                 return BadRequest(err);
             }
+            CraditCard card = this._dbContext.CraditCard.Where(w => w.Id == paymentDto.cardId).FirstOrDefault();
+            if (card == null)
+            {
+                err.error = "credit card invalid";
+                return BadRequest(err);
+            }
             Payment payment = new Payment()
             {
                 business = paymentDto.business,
                 comment = paymentDto.comment,
                 dateAdded = DateTime.Now,
                 sum = paymentDto.sum,
-                isApproved=false
+                isApproved=false,
+                CraditCard=card
             };
             payment.user = await this.userManager.FindByEmailAsync(HttpContext.User.Identity.Name);
             this._dbContext.Add(payment);

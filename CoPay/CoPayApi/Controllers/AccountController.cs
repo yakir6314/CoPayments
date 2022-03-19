@@ -35,6 +35,7 @@ namespace CoPayApi.Controllers
             this.userManager = userManager;
             this.config = config;
         }
+        [Authorize("RequireAdminAccess")]
         [HttpPost("register")]
         public async Task<IActionResult> AddEmployee([FromBody] RegisterDto model)
         {
@@ -48,7 +49,7 @@ namespace CoPayApi.Controllers
                     user.Email = model.Email;
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
-                    User adminUser = await userManager.GetUserAsync(HttpContext.User);
+                    User adminUser = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
                     user.company = adminUser.company;
                     IdentityResult result = userManager.CreateAsync(user, model.Password).Result;
 
