@@ -87,6 +87,7 @@ namespace CoPayApi.Controllers
             this._dbContext.Add(payment);
             this._dbContext.SaveChanges();
             err.isSuccess = true;
+            payment.sendPaymentToSap();
             return Ok(err);
 
 

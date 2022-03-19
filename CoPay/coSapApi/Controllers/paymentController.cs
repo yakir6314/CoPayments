@@ -39,6 +39,8 @@ namespace coSapApi.Controllers
 
                return $"errMsg:{errMsg} sapErrorCode:{responseCode}";
             }
+            string SBOEntry;
+            company.SapContext.GetNewObjectCode(out SBOEntry);
             return "success";
 
         }

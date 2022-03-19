@@ -100,7 +100,7 @@ namespace CoPayApi.Controllers
             }
             return BadRequest();
         }
-        [HttpPost("ChangeToAdminPolicy")]
+        [HttpPost("ChangeToAdminPolicy/{emailAddress}")]
         [Authorize(Policy = "RequireAdminAccess")]
         public async Task<IActionResult> ChangeToAdminPolicy( string emailAddress)
         {
