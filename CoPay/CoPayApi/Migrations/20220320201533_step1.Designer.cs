@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoPayApi.Migrations
 {
     [DbContext(typeof(CoDbContext))]
-    [Migration("20220206202702_addPaymentIsApproved")]
-    partial class addPaymentIsApproved
+    [Migration("20220320201533_step1")]
+    partial class step1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,9 +34,30 @@ namespace CoPayApi.Migrations
                     b.Property<int>("PrivateCompanyID")
                         .HasColumnType("int");
 
+                    b.Property<string>("customerCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("companies");
+                });
+
+            modelBuilder.Entity("CoPayApi.Data.Entities.CraditCard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Mask")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CraditCard");
                 });
 
             modelBuilder.Entity("CoPayApi.Data.Entities.Payment", b =>
@@ -45,6 +66,12 @@ namespace CoPayApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("ApproveDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CraditCardId")
+                        .HasColumnType("int");
 
                     b.Property<string>("business")
                         .HasColumnType("nvarchar(max)");
@@ -65,6 +92,8 @@ namespace CoPayApi.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("id");
+
+                    b.HasIndex("CraditCardId");
 
                     b.HasIndex("userId");
 
@@ -277,22 +306,26 @@ namespace CoPayApi.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("CompanyId");
+                    b.Property<int?>("companyId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("companyId");
 
                     b.HasDiscriminator().HasValue("User");
                 });
 
             modelBuilder.Entity("CoPayApi.Data.Entities.Payment", b =>
                 {
+                    b.HasOne("CoPayApi.Data.Entities.CraditCard", "CraditCard")
+                        .WithMany("payments")
+                        .HasForeignKey("CraditCardId");
+
                     b.HasOne("CoPayApi.Data.Entities.User", "user")
                         .WithMany()
                         .HasForeignKey("userId");
@@ -351,9 +384,9 @@ namespace CoPayApi.Migrations
 
             modelBuilder.Entity("CoPayApi.Data.Entities.User", b =>
                 {
-                    b.HasOne("CoPayApi.Data.Entities.Company", null)
+                    b.HasOne("CoPayApi.Data.Entities.Company", "company")
                         .WithMany("UsersInTheCompany")
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("companyId");
                 });
 #pragma warning restore 612, 618
         }

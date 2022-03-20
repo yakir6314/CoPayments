@@ -10,7 +10,7 @@ namespace CoPayApi.Dto
         public decimal sum { get; set; }
         public string comment { get; set; }
         public string business { get; set; }
-        public string cardId { get; set; }
+        public int cardId { get; set; }
     }
 
 }

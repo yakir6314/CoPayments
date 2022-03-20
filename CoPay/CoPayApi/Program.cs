@@ -26,7 +26,11 @@ namespace CoPayApi
                 {
                     var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
                     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-                    //UserAndRoleDataInitializer.SeedData(userManager, roleManager);
+                    //var users = userManager.Users.ToList();
+                    //foreach(User u in users)
+                    //{
+                    //    var a=userManager.AddToRoleAsync(u, "Admin").Result;
+                    //}
                 }
                 catch (Exception ex)
                 {

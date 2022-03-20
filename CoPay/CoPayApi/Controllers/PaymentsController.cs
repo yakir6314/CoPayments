@@ -38,9 +38,8 @@ namespace CoPayApi.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpPost]
-        [Route("ApprovePayment")]
-        [Authorize(Policy = "RequireAdminAccess")]
+        [HttpPost("ApprovePayment/{paymentId}"), Authorize(Roles = "Admin")]
+        //[Authorize(Policy = "RequireAdminAccess")]
         public async Task<IActionResult> ApprovePayment(int paymentId)
         {
             ErrorHandler err = new ErrorHandler() { isSuccess = false, data = null, error = null };
@@ -62,11 +61,10 @@ namespace CoPayApi.Controllers
             return Ok(err);
         }
 
-        [HttpPost]
+        [HttpPost,Authorize]
         [Route("addPayment")]
         public async Task<IActionResult> addPayment([FromBody] PaymentDto paymentDto)
         {
-            
             ErrorHandler err = new ErrorHandler() { isSuccess = false,data=null,error=null };
 
             
@@ -94,7 +92,15 @@ namespace CoPayApi.Controllers
             this._dbContext.Add(payment);
             this._dbContext.SaveChanges();
             err.isSuccess = true;
-            payment.sendPaymentToSap();
+            try
+            {
+                payment.sendPaymentToSap();
+            }
+            catch(Exception e)
+            {
+
+            }
+
             return Ok(err);
 
 

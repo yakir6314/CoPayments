@@ -1,4 +1,5 @@
-﻿using CoPayApi.Data.Entities;
+﻿using CoPayApi.Data;
+using CoPayApi.Data.Entities;
 using CoPayApi.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -20,23 +21,26 @@ namespace CoPayApi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        private readonly CoDbContext _dbContext;
         private readonly ILogger<AccountController> logger;
         private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
         private readonly IConfiguration config;
 
+
         public AccountController(ILogger<AccountController> logger,
             SignInManager<User> signInManager,
             UserManager<User> userManager,
-            IConfiguration config)
+            IConfiguration config,
+            CoDbContext dbContext)
         {
             this.logger = logger;
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.config = config;
+            this._dbContext = dbContext;
         }
-        [Authorize("RequireAdminAccess")]
-        [HttpPost("register")]
+        [HttpPost("register"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddEmployee([FromBody] RegisterDto model)
         {
             if (ModelState.IsValid)
@@ -49,8 +53,8 @@ namespace CoPayApi.Controllers
                     user.Email = model.Email;
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
-                    User adminUser = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-                    user.company = adminUser.company;
+                    //User adminUser = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+                    user.company = this._dbContext.companies.FirstOrDefault();
                     IdentityResult result = userManager.CreateAsync(user, model.Password).Result;
 
                     if (result.Succeeded)
@@ -64,11 +68,10 @@ namespace CoPayApi.Controllers
 
             return BadRequest();
         }
-        [HttpPost("changePassword")]
-        [Authorize]
+        [HttpPost("changePassword"), Authorize]
         public async Task<IActionResult> changePassword([FromBody] ChangePasswordDto model)
         {
-            if (HttpContext.User.Identity.Name != model.Email || !HttpContext.User.IsInRole("Admin"))
+            if (HttpContext.User.Identity.Name != model.Email)
             {
                 return Unauthorized();
             }
@@ -101,8 +104,7 @@ namespace CoPayApi.Controllers
             }
             return BadRequest();
         }
-        [Authorize("RequireAdminAccess")]
-        [HttpPost("ChangeToAdminPolicy")]
+        [HttpPost("ChangeToAdminPolicy"), Authorize(Roles = "Admin")]
         
         public async Task<IActionResult> ChangeToAdminPolicy(string emailAddress)
         {
